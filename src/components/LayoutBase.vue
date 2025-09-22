@@ -13,5 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <slot />
+  <main class="text-stone-500 min-h-dvh px-4 py-6 xl:w-4/12 xl:py-16">
+    <slot />
+  </main>
 </template>

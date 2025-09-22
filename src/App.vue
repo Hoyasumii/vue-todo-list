@@ -2,6 +2,7 @@
 import { HomePage, NotFound } from '@/pages';
 import { computed, ref, type Component } from 'vue';
 import { Layout } from '@/components';
+import { projectName } from './constants';
 
 type Route = {
   component: Component;
@@ -24,10 +25,12 @@ window.addEventListener('hashchange', () => {
 const currentView = computed<Route>(() => {
   return routes[currentPath.value.slice(1) || '/'] || NotFound
 });
+
+const getTitle = () => `${currentView.value.title} | ${projectName}`;
 </script>
 
 <template>
-  <Layout :title="currentView.title">
+  <Layout :title="getTitle()">
     <component :is="currentView.component" />
   </Layout>
 </template>
