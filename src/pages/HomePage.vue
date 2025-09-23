@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TextInput } from '@/components';
+import { TextInput, List, CheckButton, RemoveButton } from '@/components';
 import { TaskDTO } from '@/dtos';
 import { Task } from '@/entities';
 import { onMounted, reactive, ref, watch } from 'vue';
@@ -44,15 +44,27 @@ const addTask = () => {
   tasks.push(createdTask);
 }
 
+const interact = (task: Task) => {
+  task.interact();
+}
+
 </script>
 
 <template>
   <div class="flex flex-col flex-1 gap-2">
-    <div v-for="(task, index) in tasks" :key="`task-${index}`">
-      <p>{{ task.name }}</p>
-    </div>
+    <List v-for="(task, index) in tasks" :key="`task-${index}`" @click="() => interact(task as Task)">
+      <template #content>
+        <div class="flex gap-2 items-center">
+          <CheckButton :active="task.completed" />
+          <p>{{ task.name }}</p>
+        </div>
+      </template>
+      <template #postList>
+        <RemoveButton />
+      </template>
+    </List>
   </div>
 
-  <TextInput v-model="newTask" placeholder="What Would you Like To do?" />
+  <TextInput @keyup.enter="addTask" v-model="newTask" placeholder="What Would you Like To do?" />
   <button @click="addTask">Add</button>
 </template>
