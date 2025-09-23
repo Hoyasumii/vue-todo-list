@@ -13,7 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="text-stone-500 min-h-dvh px-4 py-6 xl:w-4/12 xl:py-16">
+  <main class="text-stone-500 min-h-dvh py-6 xl:w-4/12 lg:w-6/12 xl:py-16 flex flex-col gap-4">
     <slot />
   </main>
 </template>

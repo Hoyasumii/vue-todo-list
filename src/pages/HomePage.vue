@@ -4,6 +4,8 @@ import { TextInput } from '@/components';
 </script>
 
 <template>
-  Hello World
-  <TextInput name="task" />
+  <div class="flex flex-col flex-1 gap-2">
+  </div>
+
+  <TextInput name="task" placeholder="What Would you Like To do?" />
 </template>

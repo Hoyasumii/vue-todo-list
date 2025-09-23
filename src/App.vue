@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { HomePage, NotFound } from '@/pages';
-import { computed, ref, type Component } from 'vue';
+import { computed, onMounted, ref, type Component } from 'vue';
 import { Layout } from '@/components';
 import { projectName } from './constants';
 
@@ -16,14 +16,19 @@ const routes: Record<string, Route> = {
   }
 };
 
-const currentPath = ref(window.location.hash);
+const notFound: Route = {
+  component: NotFound,
+  title: "Page Not Found"
+};
 
-window.addEventListener('hashchange', () => {
-  currentPath.value = window.location.hash
+const currentPath = ref<string>(window.location.pathname);
+
+onMounted(() => {
+  currentPath.value = window.location.pathname;
 });
 
 const currentView = computed<Route>(() => {
-  return routes[currentPath.value.slice(1) || '/'] || NotFound
+  return routes[currentPath.value || '/'] || notFound
 });
 
 const getTitle = () => `${currentView.value.title} | ${projectName}`;
