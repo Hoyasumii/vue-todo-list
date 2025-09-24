@@ -8,14 +8,24 @@ type Props = {
 
 const props = defineProps<Props>()
 
+type Slots = {
+  main: () => unknown;
+  footer: () => unknown;
+}
+
+defineSlots<Slots>();
+
 onMounted(() => {
   document.title = props.title;
 })
 </script>
 
 <template>
-  <PageHeader/>
-  <main class="text-slate-950 min-h-dvh py-6 xl:w-4/12 lg:w-6/12 xl:py-16 flex flex-col gap-4">
-    <slot />
+  <PageHeader />
+  <main class="text-slate-950 xl:w-4/12 lg:w-6/12 flex flex-col gap-4 min-h-dvh">
+    <slot name="main" />
   </main>
+  <footer>
+    <slot name="footer" />
+  </footer>
 </template>
