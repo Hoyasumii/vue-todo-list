@@ -43,7 +43,7 @@ onMounted(() => {
     if (task.completed) return;
 
     setTimeout(() => {
-      tasksStore.tasks.push(Task.build(task));
+      tasksStore.addSimpleTask(task);
 
       if (tasksLength - 1 === tasksLength) {
         setTimeout(() => {
