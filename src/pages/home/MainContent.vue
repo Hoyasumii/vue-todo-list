@@ -66,21 +66,19 @@ watch(tasksStore.tasks, () => {
 </script>
 
 <template>
-  <div class="flex flex-col flex-1 gap-2 pt-28 pb-4 max-h-[95dvh] justify-self-end">
-    <AnimatePresence>
-      <List v-for="(task) in visibleTasks" :key="`task-${task.id}`" @click="() => task.interact()" ref="parent">
-        <template #content>
-          <div class="flex gap-2 items-center">
-            <CheckButton :active="task.completed" />
-            <div class="min-w-11/12 flex items-center justify-start relative">
-              <p :data-finished="task.completed"
-                class="duration-300 transition-all flex-1 data-[finished=true]:text-slate-300">{{ task.name }}</p>
-              <div :data-finished="task.completed"
-                class="absolute h-px min-w-full scale-y-0 data-[finished=true]:scale-y-100 duration-300 transition-all bg-transparent data-[finished=true]:bg-slate-300" />
-            </div>
+  <AnimatePresence>
+    <List v-for="(task) in visibleTasks" :key="`task-${task.id}`" @click="() => task.interact()" ref="parent">
+      <template #content>
+        <div class="flex gap-2 items-center">
+          <CheckButton :active="task.completed" />
+          <div class="min-w-11/12 flex items-center justify-start relative">
+            <p :data-finished="task.completed"
+              class="duration-300 transition-all flex-1 data-[finished=true]:text-slate-300">{{ task.name }}</p>
+            <div :data-finished="task.completed"
+              class="absolute h-px min-w-full scale-y-0 data-[finished=true]:scale-y-100 duration-300 transition-all bg-transparent data-[finished=true]:bg-slate-300" />
           </div>
-        </template>
-      </List>
-    </AnimatePresence>
-  </div>
+        </div>
+      </template>
+    </List>
+  </AnimatePresence>
 </template>
