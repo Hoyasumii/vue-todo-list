@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { List, CheckButton } from '@/components';
 import { TaskDTO } from '@/dtos';
-import { Task } from '@/entities';
 import { type ITask } from '@/types';
 import { computed, onMounted, watch } from 'vue';
 import { AnimatePresence } from 'motion-v';
@@ -21,6 +20,8 @@ const visibleTasks = computed(() => {
 
 onMounted(() => {
   enable(false);
+
+  if (tasksStore.tasks.length > 0) return;
 
   const localTasks = localStorage.getItem("tasks") || "[]";
   const unserializedTasks: Array<ITask> | object = JSON.parse(localTasks);
