@@ -1,21 +1,26 @@
 import { v7 } from 'uuid';
-import { type Task as ITask } from "@/types";
+import { type ITask } from "@/types";
 
 export class Task {
   protected _id: string = v7();
   protected _completed: boolean = false;
+  protected _createdAt: Date = new Date();
 
   constructor(public readonly name: string) { }
 
-  get completed() {
+  get completed(): typeof this._completed {
     return this._completed;
   }
 
-  get id() {
+  get id(): typeof this._id {
     return this._id;
   }
 
-  interact() {
+  get createdAt(): typeof this._createdAt {
+    return this._createdAt;
+  }
+
+  interact(): void {
     this._completed = !this._completed;
   }
 
@@ -23,6 +28,7 @@ export class Task {
     const newInstance = new Task(task.name);
     newInstance._id = task.id;
     newInstance._completed = task.completed;
+    newInstance._createdAt = new Date(task.createdAt);
 
     return newInstance;
   }
@@ -31,7 +37,8 @@ export class Task {
     return {
       id: this.id,
       completed: this.completed,
-      name: this.name
+      name: this.name,
+      createdAt: this._createdAt.toISOString(),
     }
   }
 }
